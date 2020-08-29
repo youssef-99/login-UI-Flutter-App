@@ -59,7 +59,7 @@ class _MyAccountState extends State<MyAccount> {
     );
   }
 
-  profilePic() => CircleAvatar(
+  profilePi() => CircleAvatar(
         backgroundColor: Colors.grey,
         radius: 100.0,
         child: _image == null
@@ -78,6 +78,24 @@ class _MyAccountState extends State<MyAccount> {
               ),
       );
 
+  profilePic() => Container(
+    height: 200,
+    width: 200,
+    decoration: BoxDecoration(
+      color: Colors.grey,
+      shape: BoxShape.circle,
+      image: DecorationImage(
+        image: _image != null ? FileImage(_image) : AssetImage(''),
+        fit: BoxFit.fill
+      ),
+    ),
+    child: IconButton(
+      onPressed: (){
+        getImage();
+      },
+      icon: _image == null ? Icon(Icons.add_a_photo, size: 40, color: Colors.blue,) : Icon(Icons.add, size: 0,),
+    ),
+  );
 
   Future getImage() async {
     final pickedFile = await picker.getImage(source: ImageSource.camera);
