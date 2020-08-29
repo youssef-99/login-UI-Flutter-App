@@ -15,8 +15,7 @@ class _MyAccountState extends State<MyAccount> {
 
   File _image;
   final picker = ImagePicker();
-
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,24 +58,6 @@ class _MyAccountState extends State<MyAccount> {
     );
   }
 
-  profilePi() => CircleAvatar(
-        backgroundColor: Colors.grey,
-        radius: 100.0,
-        child: _image == null
-            ? IconButton(
-                onPressed: () {
-                  getImage();
-                },
-                icon: Icon(
-                  Icons.camera_alt,
-                  size: 40,
-                ),
-              )
-            : Image.file(
-                _image,
-                fit: BoxFit.fill,
-              ),
-      );
 
   profilePic() => Container(
     height: 200,
