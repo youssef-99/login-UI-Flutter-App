@@ -17,7 +17,7 @@ class _MyLocationState extends State<MyLocation> {
   @override
   void initState() {
     super.initState();
-    getLocation();
+    openLocationService();
   }
 
   @override
@@ -54,7 +54,6 @@ class _MyLocationState extends State<MyLocation> {
                   onPressed: (){
                     Navigator.pop(context);
                     setState(() {
-                      service = true;
                       getLocation();
                     });
                   },
@@ -64,6 +63,8 @@ class _MyLocationState extends State<MyLocation> {
             );
         }
       );
+    }else {
+      getLocation();
     }
   }
 
