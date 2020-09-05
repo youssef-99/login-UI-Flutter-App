@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:login/account.dart';
+import 'package:login/pages/account.dart';
+import 'package:login/pages/sign_up.dart';
+import 'package:login/widgets/confirm_button.dart';
+import 'package:login/widgets/text_form_field.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LogInPage extends StatefulWidget {
@@ -37,81 +40,9 @@ class _LogInPageState extends State<LogInPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(right: 30.0, bottom: 10.0),
-                child: TextFormField(
-                  controller: emailCnt,
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Please enter your email!';
-                    }
-                    return null;
-                  },
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    icon: Icon(Icons.email, color: Colors.black),
-                    labelText: 'Enter email',
-                    labelStyle: TextStyle(fontSize: 20.0),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 30.0, bottom: 20.0),
-                child: TextFormField(
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Please enter your password!';
-                      }
-                      return null;
-                    },
-                    obscureText: true,
-                    decoration: InputDecoration(
-                        icon: Icon(Icons.lock, color: Colors.black),
-                        labelText: 'Enter password',
-                        labelStyle: TextStyle(fontSize: 20.0))),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 0.0),
-                height: 75,
-                width: 180,
-                padding: EdgeInsets.only(top: 20.0, bottom: 10.0),
-                decoration: BoxDecoration(
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                      color: Colors.blue[900].withOpacity(1),
-                      blurRadius: 25,
-                      offset: Offset(0, 10),
-                    ),
-                  ],
-                ),
-                child: RaisedButton(
-                  onPressed: () async{
-                    if (_formKey.currentState.validate()) {
-                      SnackBar(
-                        content: const Text(
-                          'Submitting...',
-                        ),
-                        backgroundColor: Colors.grey,
-                        duration: Duration(seconds: 1),
-                      );
-                      SharedPreferences users = await SharedPreferences.getInstance();
-                      users.setString('email', emailCnt.text);
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyAccount()));
-                    }
-                  },
-                  child: Text(
-                    'Login',
-                    style: TextStyle(
-                        fontSize: 22.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  ),
-                  color: Colors.blue[800],
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5.0)),
-                  elevation: 10,
-                ),
-              ),
+              TextFField(emailCnt,'Please enter your email!', 'Enter email', Icons.email),
+              TextFField(passCnt,'Please enter your password!', 'Enter password', Icons.lock),
+              ConfirmButton(_formKey, emailCnt, passCnt, 'Login'),
               InkWell(
                 onTap: (){},
                 child: Text(
@@ -137,7 +68,9 @@ class _LogInPageState extends State<LogInPage> {
               style: TextStyle(color: Colors.white, fontSize: 20.0),
             ),
             RaisedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));
+              },
               color: Colors.white,
               padding: EdgeInsets.symmetric(vertical: 7, horizontal: 55),
               shape: RoundedRectangleBorder(

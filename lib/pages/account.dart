@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:login/loginPage.dart';
+import 'package:login/pages/loginPage.dart';
 import 'dart:io';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,7 +15,7 @@ class _MyAccountState extends State<MyAccount> {
 
   File _image;
   final picker = ImagePicker();
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +24,7 @@ class _MyAccountState extends State<MyAccount> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            profilePic(),
+            pc(),
             SizedBox(height: 10.0),
             Text(
               'Youssef William',
@@ -58,7 +58,17 @@ class _MyAccountState extends State<MyAccount> {
     );
   }
 
-
+pc() => CircleAvatar(
+  backgroundImage: _image != null ? FileImage(_image) : AssetImage(''),
+  radius: 150,
+  backgroundColor: Colors.grey,
+  child: IconButton(
+    onPressed: (){
+      getImage();
+    },
+    icon: _image == null ? Icon(Icons.add_a_photo, size: 40, color: Colors.blue,) : Icon(Icons.add, size: 0,),
+  ),
+);
   profilePic() => Container(
     height: 200,
     width: 200,

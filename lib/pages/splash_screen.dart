@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:login/account.dart';
-import 'package:login/loginPage.dart';
+import 'package:login/pages/account.dart';
+import 'package:login/pages/loginPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:splashscreen/splashscreen.dart';
 
